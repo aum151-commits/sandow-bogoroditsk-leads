@@ -1,0 +1,15 @@
+# Приёмник заявок сайта Богородицка. Изолирован от sandow-lead-bot (Москва).
+services:
+  - type: web
+    name: sandow-bogoroditsk-leads
+    runtime: python
+    plan: free
+    region: frankfurt
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app --bind 0.0.0.0:$PORT --workers 1 --threads 4 --timeout 30
+    healthCheckPath: /health
+    envVars:
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false
+      - key: TARGET_CHAT_ID
+        sync: false
