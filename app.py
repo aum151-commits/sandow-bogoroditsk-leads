@@ -60,7 +60,7 @@ def lead():
     raw_phone = (data.get("phone") or "").strip()
     digits = re.sub(r"\D", "", raw_phone)
     if len(digits) < 10:
-        return _cors(jsonify(ok=False, error="phone")), 400
+        return _cors(jsonify(ok=False, error="phone", got=raw_phone), origin), 400
     phone = "+7" + digits[-10:]
 
     name = (data.get("name") or "").strip()[:60]
